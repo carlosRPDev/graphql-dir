@@ -1,5 +1,6 @@
 'use strict'
 
+require('dotenv').config()
 // Estamos requiriendo las librerias que se va a usar desde la dependencia de GraphQl
 const { makeExecutableSchema } = require('graphql-tools')
 // requerir las librerias que necesitamos para ejecutar express
