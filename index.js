@@ -19,6 +19,8 @@ const resolvers = require('./lib/resolvers')
 const app = express()
 // se configura el puerto de escucha de api
 const port = process.env.port || 3000
+// configuracion para que GraphQL no funcione en prodcuccion
+const isDev = process.env.NODE_ENV !== 'production'
 
 // Definiendo el esquema
 const typeDefs = readFileSync(
@@ -36,7 +38,7 @@ app.use(
   gqlMiddleware({
     schema: schema,
     rootValue: resolvers,
-    graphiql: true
+    graphiql: isDev
   })
 )
 
