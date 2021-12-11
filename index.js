@@ -6,6 +6,9 @@ const { makeExecutableSchema } = require('graphql-tools')
 // requerir las librerias que necesitamos para ejecutar express
 const express = require('express')
 const gqlMiddleware = require('express-graphql')
+// Estamos requiriendo cors de express para configurar el servidor en produccion
+// NOTA: debemos instalar la dependencia de cors con 'npm i cors'
+const cors = require('cors')
 // librerias para leer desde otra ubicacion el archivo schema
 const { readFileSync } = require('fs')
 const { join } = require('path')
@@ -23,6 +26,9 @@ const typeDefs = readFileSync(
   'utf-8'
 )
 const schema = makeExecutableSchema({ typeDefs, resolvers })
+
+// como cors es un middleware debemos aplicarlo antes de api
+app.use(cors())
 
 // Configuramos el midleware para la ejecucion de los resolvers
 app.use(
